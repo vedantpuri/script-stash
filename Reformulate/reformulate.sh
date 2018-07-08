@@ -47,10 +47,12 @@ print_usage() {
 extract_information() {
   echo "${bold}Extracting relevant information...${normal}"
   local git_config_file="${given_project_path}.git/config"
-  # Check if config file exists otherwise not a git repo
+  if [[ ! -f "${git_config_file}" ]]
+  then
+    echo "Not a git repo" && exit
+  fi
   local git_file="$(awk '/url/{print $NF}' "${git_config_file}" | cut -f4- -d/)"
   git_repo="${git_file%????}"
-  # echo "${git_repo}"
   echo "Extraction complete."
 
 }
@@ -100,8 +102,11 @@ parse_args() {
     ;;
     -ff=*|--formula-file=*)
     local formula_path="${@#*=}"
-    [[ -z "${formula_path}" ]] && echo "No formula file provided." && exit
+    [[ -z "${formula_path}" ]] && echo "No formula file provided. Quitting..." && exit
     formula_file="${formula_path}"
+    ;;
+    "")
+    echo "No formula file provided." && exit
     ;;
     *)
     echo "Invalid argument. Run with ${underline}-h${normal} for help."

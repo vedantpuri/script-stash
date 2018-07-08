@@ -10,8 +10,18 @@ A simple script to automatically update the `url`, `version` and `sha256` of you
 - There exists a **public** GitHub repository for your package
 - There exists a **public** GitHub repository for your homebrew-tap
 
-## Usage
+## Installation
+For **macOS**, you can install from the repo directly:
+```bash
+curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Reformulate/reformulate.sh > reformulate && mv reformulate /usr/local/bin/ && chmod 700 /usr/local/bin/reformulate && chmod +x /usr/local/bin/reformulate
+```
 
+**Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/`
+```bash
+mkdir -p ~/bin && curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Reformulate/reformulate.sh > reformulate && mv reformulate ~/bin/ && chmod 700 ~/bin/reformulate && chmod +x ~/bin/reformulate
+```
+
+## Usage
 ### Step 1
 Navigate to your project.
 ```bash
@@ -23,6 +33,7 @@ To update formula to latest release
 ```bash
 reformulate -ff=~/path/to/formula/file
 ```
+**Note:** Currently only absolute paths are supported
 
 ### Step 3
 Commit these changes made to your homebrew-repo(tap)
