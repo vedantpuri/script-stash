@@ -8,7 +8,6 @@ A simple script to fetch your latest HomeBrew tap release and automatically upda
 
 ## Assumptions
 - There exists a **public** GitHub repository for your package
-- There exists a **public** GitHub repository for your homebrew-tap
 - The url used in your formula is of the type `https://github.com/username/repo-name/archive/tag-name.tar.gz`
 
 ## Installation

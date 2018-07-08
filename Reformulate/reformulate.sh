@@ -18,7 +18,7 @@ output="/dev/stdout"
 given_project_path="$(pwd)/"
 git_repo=""
 formula_file=""
-# current_tag_name=""
+current_tag_name=""
 latest_tag_name=""
 retrieved_sha256=""
 temp_dir="updater_temp/"
@@ -65,7 +65,11 @@ get_latest_tag() {
     echo "No releases exist for ${git_repo}."
     exit
   fi
-  # check from formula file if version same then no need to update
+  current_tag_name="$(awk '/version/{print $NF}' ${formula_file})"
+  if [[ ! -z current_tag_name && "${current_tag_name}" == "\"${latest_tag_name}\"" ]]
+  then
+    echo "No new release detected. Formula up-to-date" && exit
+  fi
   echo "Tag name ${latest_tag_name} retreived."
 }
 
