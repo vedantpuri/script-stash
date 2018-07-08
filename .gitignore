@@ -1,0 +1,12 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Other unwanted stuff
+*.py
+*tests/
+*pyosphere/
+*pyosphere.config
+
+.idea
+.DS_Store
+.DS_STORE
