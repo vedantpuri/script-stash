@@ -113,7 +113,7 @@ parse_args() {
     echo "No formula file provided." && exit
     ;;
     *)
-    echo "Invalid argument. Run with ${underline}-h${normal} for help."
+    echo "Invalid argument. Run with ${underline}-h${normal} for help." && exit
     ;;
   esac
 }
