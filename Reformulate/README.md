@@ -1,5 +1,5 @@
 # Reformulate
-A simple script to automatically update the `url`, `version` and `sha256` of your HomeBrew tap formula file to keep it consistent with your latest package release.
+A simple script to fetch your latest HomeBrew tap release and automatically update the `url`, `version` and `sha256` of your HomeBrew tap formula file.
 
 ## Requirements
 - macOS or Linux
@@ -46,6 +46,8 @@ Commit these changes made to your homebrew-repo(tap)
   Print script version
 - #### Help (`-h|--help`)
   Print script usage
+
+One could also setup this script as a [**launchd**](http://www.launchd.info) or a [**cron**](https://en.wikipedia.org/wiki/Cron) job to perform a periodic check and update.
 
 ## License
  The project is available under the **MIT** License. Check out the [license ](https://github.com/vedantpuri/script-stash/blob/master/LICENSE.md) file for more information.
