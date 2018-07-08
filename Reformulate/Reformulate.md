@@ -9,6 +9,7 @@ A simple script to automatically update the `url`, `version` and `sha256` of you
 ## Assumptions
 - There exists a **public** GitHub repository for your package
 - There exists a **public** GitHub repository for your homebrew-tap
+- The url used in your formula is of the type `https://github.com/username/repo-name/archive/tag-name.tar.gz`
 
 ## Installation
 For **macOS**, you can install from the repo directly:

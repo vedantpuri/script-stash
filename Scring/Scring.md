@@ -14,6 +14,7 @@ mkdir -p ~/bin && curl -L -s https://github.com/vedantpuri/script-stash/raw/mast
 
 ## Usage
 **Note:** Of all the options used, make sure that the one specifying the path is mentioned last.
+
 E.g.
 ```bash
 scring -a="path/to/target/script/script_name"
