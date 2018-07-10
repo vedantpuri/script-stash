@@ -24,7 +24,6 @@ retrieved_sha256=""
 temp_dir="updater_temp/"
 
 
-
 # ----- SCRIPT SUPPORT
 
 # Print the script version to console
@@ -44,6 +43,7 @@ print_usage() {
 
 # ----- REFORMULATE PROJECT MANAGEMENT
 
+# Extract info about repository
 extract_information() {
   echo "${bold}Extracting relevant information...${normal}"
   local git_config_file="${given_project_path}.git/config"
@@ -57,6 +57,7 @@ extract_information() {
 
 }
 
+# Retreive name of latest release
 get_latest_tag() {
   echo "${bold}Retrieving latest release name...${normal}"
   latest_tag_name="$(curl -s https://api.github.com/repos/"${git_repo}"/releases/latest |  sed -n 's|.*"tag_name": "\(.*\)",|\1|p')"
@@ -73,6 +74,7 @@ get_latest_tag() {
   echo "Tag name ${latest_tag_name} retreived."
 }
 
+# Generate sha256 of latest release file
 retreive_sha256() {
   echo "${bold}Generating file hash${normal}"
   mkdir -p "${temp_dir}"
@@ -83,6 +85,7 @@ retreive_sha256() {
   echo "Hash successfully generated."
 }
 
+# Update relevant information in the formula file
 update_formula() {
   echo "${bold}Updating Formula file...${normal}"
   local new_url="https://github.com/${git_repo}/archive/${latest_tag_name}.tar.gz"
@@ -90,8 +93,8 @@ update_formula() {
   $(sed -i '' "s|.*version.*|  version \"${latest_tag_name}\"|"  "${formula_file}")
   $(sed -i '' "s|.*sha256.*|  sha256 \"${retrieved_sha256}\"|"  "${formula_file}")
   echo "Update complete."
-
 }
+
 
 # ----- REFORMULATE CONTROL FLOW
 
@@ -118,6 +121,7 @@ parse_args() {
   esac
 }
 
+# Script Execution 
 parse_args "${@}"
 extract_information
 get_latest_tag

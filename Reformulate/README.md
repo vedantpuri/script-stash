@@ -1,5 +1,5 @@
 # Reformulate
-A simple script to fetch your latest HomeBrew tap release and automatically update the `url`, `version` and `sha256` of your HomeBrew tap formula file.
+A simple script to fetch your latest HomeBrew package release and automatically update the `url`, `version` and `sha256` of your HomeBrew formula file.
 
 ## Requirements
 - macOS or Linux
@@ -23,7 +23,7 @@ mkdir -p ~/bin && curl -L -s https://github.com/vedantpuri/script-stash/raw/mast
 
 ## Usage
 ### Step 1
-Navigate to your project.
+Navigate to your project(The repo where you coded your package).
 ```bash
 cd ~/path/to/project
 ```
@@ -33,6 +33,7 @@ To update formula to latest release
 ```bash
 reformulate -ff=~/path/to/formula/file
 ```
+
 **Note:** Currently only absolute paths are supported
 
 ### Step 3
