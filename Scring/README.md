@@ -1,5 +1,5 @@
 # Scring
-A simple script to generate the string version of entire script file. Created for ease of conversion of script to string while making commands for one of my other projects NLU.Preserves formatting including tabs and newlines as one would expect.
+A simple script to generate the string version of entire script file. Created for ease of conversion of script to string while making commands for one of my other projects:[natural-language-unix](https://github.com/mayankk2308/natural-language-unix).Preserves formatting including tabs and newlines as one would expect.
 
 ## Installation
 For **macOS**, you can install from the repo directly:
