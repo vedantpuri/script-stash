@@ -1,15 +1,19 @@
 # Scring
-A simple script to generate the string version of entire script file. Created for ease of conversion of script to string while making commands for one of my other projects:[natural-language-unix](https://github.com/mayankk2308/natural-language-unix).Preserves formatting including tabs and newlines as one would expect.
+A simple script to generate the string version of entire script file. Preserves formatting including tabs and newlines as one would expect.
+
+## Requirements
+- macOS or Linux
+- Bash >= **3.2** (lower versions untested)
 
 ## Installation
 For **macOS**, you can install from the repo directly:
 ```bash
-curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Scring/scring.sh > scring && mv scring /usr/local/bin/ && chmod 700 /usr/local/bin/scring && chmod +x /usr/local/bin/scring
+curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > scring && mv scring /usr/local/bin/ && chmod 700 /usr/local/bin/scring && chmod +x /usr/local/bin/scring
 ```
 
-**Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/`
+**Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/` (requires `curl`, `sed`, `grep`, and `xargs`):
 ```bash
-mkdir -p ~/bin && curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Scring/scring.sh > scring && mv scring ~/bin/ && chmod 700 ~/bin/scring && chmod +x ~/bin/scring
+mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > scring && mv scring ~/bin/ && chmod 700 ~/bin/scring && chmod +x ~/bin/scring
 ```
 
 ## Usage
@@ -41,4 +45,4 @@ scring -r="script_name"
   Print script usage
 
 ## License
- The project is available under the **MIT** License. Check out the [license ](https://github.com/vedantpuri/script-stash/blob/master/LICENSE.md) file for more information.
+ The script is available under the **MIT** License. Check out the [license ](https://github.com/vedantpuri/script-stash/blob/master/LICENSE.md) file for more information.

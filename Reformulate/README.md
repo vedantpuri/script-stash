@@ -13,12 +13,12 @@ A simple script to fetch your latest HomeBrew package release and automatically 
 ## Installation
 For **macOS**, you can install from the repo directly:
 ```bash
-curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Reformulate/reformulate.sh > reformulate && mv reformulate /usr/local/bin/ && chmod 700 /usr/local/bin/reformulate && chmod +x /usr/local/bin/reformulate
+curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > reformulate && mv reformulate /usr/local/bin/ && chmod 700 /usr/local/bin/reformulate && chmod +x /usr/local/bin/reformulate
 ```
 
-**Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/`
+**Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/` (requires `curl`, `sed`, `grep`, and `xargs`):
 ```bash
-mkdir -p ~/bin && curl -L -s https://github.com/vedantpuri/script-stash/raw/master/Reformulate/reformulate.sh > reformulate && mv reformulate ~/bin/ && chmod 700 ~/bin/reformulate && chmod +x ~/bin/reformulate
+mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > reformulate && mv reformulate ~/bin/ && chmod 700 ~/bin/reformulate && chmod +x ~/bin/reformulate
 ```
 
 ## Usage
@@ -50,4 +50,4 @@ Commit these changes made to your homebrew-repo(tap)
 One could also setup this script as a [**launchd**](http://www.launchd.info) or a [**cron**](https://en.wikipedia.org/wiki/Cron) job to perform a periodic check and update.
 
 ## License
- The project is available under the **MIT** License. Check out the [license ](https://github.com/vedantpuri/script-stash/blob/master/LICENSE.md) file for more information.
+ The script is available under the **MIT** License. Check out the [license ](https://github.com/vedantpuri/script-stash/blob/master/LICENSE.md) file for more information.
