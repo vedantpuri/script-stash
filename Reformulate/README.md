@@ -23,25 +23,25 @@ mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/
 
 ## Usage
 ### Step 1
-Navigate to your project(The repo where you coded your package).
+Navigate to the root of your homebrew-tap repo(where your formula exists).
 ```bash
-cd ~/path/to/project
+cd ~/path/to/tap
 ```
 
 ### Step 2
 To update formula to latest release
 ```bash
-reformulate -ff=~/path/to/formula/file
+reformulate -ff=/path/to/formula/file
 ```
 
-**Note:** Currently only absolute paths are supported
+**Note:** Run this from the root of the repo. Relative path supported.
 
 ### Step 3
-Commit these changes made to your homebrew-repo(tap)
+Commit these changes made to your homebrew-tap repo.
 
 ### Options
 - #### Formula (`-ff=|--formula-file=`)
-  Specify **absolute** path to formula.rb file
+  Specify path to formula.rb file
 - #### Version (`-v|--version`)
   Print script version
 - #### Help (`-h|--help`)

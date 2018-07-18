@@ -1,7 +1,7 @@
 #!/bin/bash
 # reformulate.sh
 # Author: Vedant Puri
-# Version: 1.0.0
+# Version: 2.0.0
 
 # ----- ENVIRONMENT & CONSOLE
 
@@ -11,7 +11,7 @@ bold="$(tput bold)"
 normal="$(tput sgr0)"
 
 # Script information
-script_version="1.0.0"
+script_version="2.0.0"
 
 # Environment information with defaults
 output="/dev/stdout"
@@ -51,8 +51,8 @@ extract_information() {
   then
     echo "Not a git repo" && exit
   fi
-  local git_file="$(awk '/url/{print $NF}' "${git_config_file}" | cut -f4- -d/)"
-  git_repo="${git_file%????}"
+  local url="$(awk '/url/{print  $2}' "${given_project_path}${formula_file}" | cut -f4- -d/)"
+  git_repo="$(echo ${url} | cut -d '/' -f 1,2)"
   echo "Extraction complete."
 
 }
@@ -67,7 +67,7 @@ get_latest_tag() {
     exit
   fi
   current_tag_name="$(awk '/version/{print $NF}' ${formula_file})"
-  if [[ ! -z current_tag_name && "${current_tag_name}" == "\"${latest_tag_name}\"" ]]
+  if [[ ! -z "${current_tag_name}" && "${current_tag_name}" == "\"${latest_tag_name}\"" ]]
   then
     echo "No new release detected. Formula up-to-date" && exit
   fi
@@ -95,6 +95,11 @@ update_formula() {
   echo "Update complete."
 }
 
+commit_changes() {
+  git add "$formula_file"
+  git commit -m "Update formula for \"${git_repo}\" to ${latest_tag_name}"
+  git push origin master
+}
 
 # ----- REFORMULATE CONTROL FLOW
 
@@ -121,9 +126,10 @@ parse_args() {
   esac
 }
 
-# Script Execution 
+# Script Execution
 parse_args "${@}"
 extract_information
 get_latest_tag
 retreive_sha256
 update_formula
+# commit_changes
