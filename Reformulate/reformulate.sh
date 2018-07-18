@@ -22,6 +22,7 @@ current_tag_name=""
 latest_tag_name=""
 retrieved_sha256=""
 temp_dir="updater_temp/"
+commit=false
 
 
 # ----- SCRIPT SUPPORT
@@ -45,6 +46,10 @@ print_usage() {
 
 # Extract info about repository
 extract_information() {
+  if [[ -z "${formula_file}" ]]
+  then
+    echo "No formula file provided." && exit
+  fi
   echo "${bold}Extracting relevant information...${normal}"
   local git_config_file="${given_project_path}.git/config"
   if [[ ! -f "${git_config_file}" ]]
@@ -96,34 +101,42 @@ update_formula() {
 }
 
 commit_changes() {
-  git add "$formula_file"
-  git commit -m "Update formula for \"${git_repo}\" to ${latest_tag_name}"
-  git push origin master
+  if [[ "${commit}" == "true" ]]
+  then
+    echo "${bold}Comitting changes...${normal}"
+    git add "$formula_file"
+    git commit -m "Update formula for \"${git_repo}\" to ${latest_tag_name}"
+    git push origin master
+    echo "Changes pushed to GitHub."
+  fi
 }
 
 # ----- REFORMULATE CONTROL FLOW
 
 # Parse script arguments
 parse_args() {
-  case "${@}" in
-    -v|--version)
-    print_version
-    ;;
-    -h|--help)
-    print_usage
-    ;;
-    -ff=*|--formula-file=*)
-    local formula_path="${@#*=}"
-    [[ -z "${formula_path}" ]] && echo "No formula file provided. Quitting..." && exit
-    formula_file="${formula_path}"
-    ;;
-    "")
-    echo "No formula file provided." && exit
-    ;;
-    *)
-    echo "Invalid argument. Run with ${underline}-h${normal} for help." && exit
-    ;;
-  esac
+  for arg in "${@}"
+  do
+    case "${arg}" in
+      -v|--version)
+      print_version
+      ;;
+      -h|--help)
+      print_usage
+      ;;
+      -ff=*|--formula-file=*)
+      local formula_path="${arg#*=}"
+      [[ -z "${formula_path}" ]] && echo "No formula file provided. Quitting..." && exit
+      formula_file="${formula_path}"
+      ;;
+      -c|--commit)
+      commit=true
+      ;;
+      *)
+      echo "Invalid argument. Run with ${underline}-h${normal} for help." && exit
+      ;;
+    esac
+  done
 }
 
 # Script Execution
@@ -132,4 +145,4 @@ extract_information
 get_latest_tag
 retreive_sha256
 update_formula
-# commit_changes
+commit_changes
