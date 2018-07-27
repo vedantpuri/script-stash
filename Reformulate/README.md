@@ -1,4 +1,5 @@
-# Reformulate
+![Header](../.resources/reformulate_hero.png)
+
 A simple script to fetch your latest HomeBrew package release and automatically update the `url`, `version` and `sha256` of your HomeBrew formula file.
 
 ## Requirements
@@ -8,7 +9,7 @@ A simple script to fetch your latest HomeBrew package release and automatically 
 
 ## Assumptions
 - There exists a **public** GitHub repository for your package
-- The url used in your formula is of the type `https://github.com/username/repo-name/archive/tag-name.tar.gz`
+- The url used in your formula is of the type `https://github.com/*username*/*repo-name*/archive/*tag-name*.tar.gz`
 
 ## Installation
 For **macOS**, you can install from the repo directly:
