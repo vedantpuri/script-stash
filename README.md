@@ -1,4 +1,7 @@
 ![Header](.resources/hero.png)
+
+![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)  
+
 A stash of scripts to automate certain specific tasks and make life easy.
 
 ## Usage
