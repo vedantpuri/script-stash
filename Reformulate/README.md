@@ -43,7 +43,7 @@ Commit these changes made to your homebrew-tap repo.
 - #### Formula (`-ff=|--formula-file=`)
   Specify path to formula.rb file
 - #### Commit (`-c|--commit`)
-  Automatically commits the changes to your master branch
+  Automatically commit the changes to the master branch
 - #### Version (`-v|--version`)
   Print script version
 - #### Help (`-h|--help`)
