@@ -8,8 +8,10 @@ A stash of scripts to automate certain specific tasks and make life easy.
 Navigate through the root of the repository. Various directories represent the different scripts that are contained within them.
 Open the directory of your choice and follow the README file to know more about the script.
 The individual scripts in this repo have also been linked below:
+- [Django-Revamp](https://github.com/vedantpuri/script-stash/tree/master/Django-revamp)
 - [Reformulate](https://github.com/vedantpuri/script-stash/tree/master/Reformulate)
 - [Scring](https://github.com/vedantpuri/script-stash/tree/master/Scring)
+
 
 **Note:** The release version of the stash may differ from the version of individual scripts.
 
