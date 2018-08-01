@@ -1,7 +1,7 @@
 #!/bin/bash
 # reformulate.sh
 # Author: Vedant Puri
-# Version: 2.0.0
+# Version: 2.0.1
 
 # ----- ENVIRONMENT & CONSOLE
 
@@ -11,7 +11,7 @@ bold="$(tput bold)"
 normal="$(tput sgr0)"
 
 # Script information
-script_version="2.0.0"
+script_version="2.0.1"
 
 # Environment information with defaults
 output="/dev/stdout"
@@ -34,11 +34,12 @@ print_version() {
 
 # Print reformulate.sh usage
 print_usage() {
-  echo "Usage: ${bold}./reformulate.sh${normal} [-v|--version] [-h|--help]
+  echo "Usage: ${bold}./reformulate.sh${normal} [-v|--version] [-h|--help] [-ff=|-formula-file=] [-c|-commit]
   where:
   ${underline}-v${normal}        Prints script version
   ${underline}-h${normal}        Prints script usage
-  ${underline}-ff=${normal}      Updates the specified formula file"
+  ${underline}-ff=${normal}      Updates the specified formula file
+  ${underline}-c${normal}        Automatically commit changes to master branch"
 }
 
 
