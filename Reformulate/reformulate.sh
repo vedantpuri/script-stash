@@ -116,6 +116,7 @@ commit_changes() {
 
 # Parse script arguments
 parse_args() {
+  [[ -z  "${@}" ]] && echo "Invalid argument. Run with ${underline}-h${normal} for help." && exit
   for arg in "${@}"
   do
     case "${arg}" in
