@@ -22,7 +22,7 @@ print_version() {
 
 # Print revamp.sh usage
 print_usage() {
-  echo "Usage: ${bold}./reformulate.sh${normal} [-v|--version] [-h|--help] [-c=|--current-name=] [-n=|--new-name=]
+  echo "Usage: ${bold}./revamp.sh${normal} [-v|--version] [-h|--help] [-c=|--current-name=] [-n=|--new-name=]
   where:
   ${underline}-v${normal}        Prints script version
   ${underline}-h${normal}        Prints script usage
