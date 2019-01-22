@@ -8,12 +8,12 @@ A simple script to generate the string version of entire script file. Preserves 
 ## Installation
 For **macOS**, you can install from the repo directly:
 ```bash
-curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > scring && mv scring /usr/local/bin/ && chmod 700 /usr/local/bin/scring && chmod +x /usr/local/bin/scring
+curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | grep "scring" | xargs curl -L -s -0 > scring && mv scring /usr/local/bin/ && chmod 700 /usr/local/bin/scring && chmod +x /usr/local/bin/scring
 ```
 
 **Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/` (requires `curl`, `sed`, `grep`, and `xargs`):
 ```bash
-mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > scring && mv scring ~/bin/ && chmod 700 ~/bin/scring && chmod +x ~/bin/scring
+mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | grep "scring" | xargs curl -L -s -0 > scring && mv scring ~/bin/ && chmod 700 ~/bin/scring && chmod +x ~/bin/scring
 ```
 
 ## Usage

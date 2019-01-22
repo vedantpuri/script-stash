@@ -10,12 +10,12 @@ A simple script to easily allow you to change your Django project name.
 ## Installation
 For **macOS**, you can install from the repo directly:
 ```bash
-curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > revamp && mv revamp /usr/local/bin/ && chmod 700 /usr/local/bin/revamp && chmod +x /usr/local/bin/revamp
+curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | grep "revamp" | xargs curl -L -s -0 > revamp && mv revamp /usr/local/bin/ && chmod 700 /usr/local/bin/revamp && chmod +x /usr/local/bin/revamp
 ```
 
 **Linux** users may prefer replacing `/usr/local/bin/` to `~/bin/` (requires `curl`, `sed`, `grep`, and `xargs`):
 ```bash
-mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | xargs curl -L -s -0 > revamp && mv revamp ~/bin/ && chmod 700 ~/bin/revamp && chmod +x ~/bin/revamp
+mkdir -p ~/bin && curl -s "https://api.github.com/repos/vedantpuri/script-stash/releases/latest" | grep '"browser_download_url":' | sed -E 's/.*"([^"]+)".*/\1/' | grep "revamp" | xargs curl -L -s -0 > revamp && mv revamp ~/bin/ && chmod 700 ~/bin/revamp && chmod +x ~/bin/revamp
 ```
 
 ## Usage
