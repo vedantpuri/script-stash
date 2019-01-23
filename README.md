@@ -17,8 +17,8 @@ The individual scripts in this repo have also been linked below:
 
 ## You may also like
 The projects for which I may have created these scripts are mentioned below:
-- [pyosphere](https://github.com/vedantpuri/pyosphere)
-- [natural language unix](https://github.com/mayankk2308/natural-language-unix)  
+- [Pyosphere](https://github.com/vedantpuri/pyosphere)
+- [Nutshell](https://github.com/mayankk2308/nutshell)  
 
 Feel free to check them out.
 
