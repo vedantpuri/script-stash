@@ -6,10 +6,12 @@ A simple script to fetch your latest HomeBrew package release and automatically 
 - macOS or Linux
 - Bash >= **3.2** (lower versions untested)
 - git >= **2.18**
+- wget
 
 ## Assumptions
 - There exists a **public** GitHub repository for your package
 - The url used in your formula is of the type `https://github.com/*username*/*repo-name*/archive/*tag-name*.tar.gz`
+- The remote repository of the formula repo is referred to by the remote `origin`
 
 ## Installation
 For **macOS**, you can install from the repo directly:
