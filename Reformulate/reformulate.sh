@@ -1,7 +1,7 @@
 #!/bin/bash
 # reformulate.sh
 # Author: Vedant Puri
-# Version: 2.0.2
+# Version: 2.0.3
 
 # ----- ENVIRONMENT & CONSOLE
 
@@ -11,7 +11,7 @@ bold="$(tput bold)"
 normal="$(tput sgr0)"
 
 # Script information
-script_version="2.0.2"
+script_version="2.0.3"
 
 # Environment information with defaults
 output="/dev/stdout"
@@ -25,6 +25,10 @@ username=""
 temp_dir="updater_temp/"
 commit=false
 
+# Error Messages
+conn_error="Not Connected to the internet, please try again later. Quitting..."
+push_error="Couldn't push to GitHub: Not connected to the internet, please push changes yourself when connected. Quitting..."
+invalid_formula="Invalid Formula File Provided. Check Requirements and Try Again. Quitting..."
 
 # ----- SCRIPT SUPPORT
 
@@ -54,12 +58,18 @@ check_requirements() {
   fi
 }
 
+# Check Network connectivity
+check_network_conn() {
+  wget -q --spider http://github.com
+  local conn_stat=$(echo $?)
+  if [[ "${conn_stat}" != "0" ]]
+  then
+    echo "${1}" && exit
+  fi
+}
+
 # Extract info about repository
 extract_information() {
-  if [[ -z "${formula_file}" ]]
-  then
-    echo "No formula file provided." && exit
-  fi
   echo "${bold}Extracting relevant information...${normal}"
   local git_config_file="${given_project_path}.git/config"
   if [[ ! -f "${git_config_file}" ]]
@@ -67,7 +77,13 @@ extract_information() {
     echo -e "Not a git repo. \nQuitting..." && exit
   fi
   local url="$(awk '/url/{print  $2}' "${given_project_path}${formula_file}" | cut -f4- -d/)"
+
   git_repo="$(echo ${url} | cut -d '/' -f 1,2)"
+  if [[ -z "${git_repo}" ]]
+  then
+    echo "${invalid_formula}" && exit
+  fi
+
   username="$(echo ${git_repo} | cut -d '/' -f 1)"
   echo "Extraction complete."
 
@@ -77,20 +93,14 @@ extract_information() {
 get_latest_tag() {
   echo "${bold}Retrieving latest release name...${normal}"
 
-  # Internet connectivity check
-  wget -q --spider http://google.com
-  local conn_stat=$(echo $?)
-  if [[ "${conn_stat}" != "0" ]]
-  then
-    echo "Not Connected to the internet, please try again later." && exit
-  fi
+  check_network_conn "${conn_error}"
 
   # Rate limit checking
   local rate_limit="$(curl -i -s https://api.github.com/users/"${username}" | grep "X-RateLimit-Remaining:"| cut -d " " -f2 | tr -d '\r')"
   if [[ "${rate_limit}" -lt 2 ]]
   then
     echo -e "\nYour current rate limit is insufficient to carry out this operation. You could wait for an hour and retry, or authenticate yourself and increase Rate Limit. \n"
-    read -r -p "Would you like to authenticate yourself to GitHub ?[y/n]" response
+    read -r -p "Would you like to authenticate yourself to GitHub ?[y/n] " response
     if [[ "${response}" =~ ^([yY][eE][sS]|[yY])+$ ]]
     then
       latest_tag_name="$(curl -u "${username}" -s https://api.github.com/repos/"${git_repo}"/releases/latest |  sed -n 's|.*"tag_name": "\(.*\)",|\1|p')"
@@ -116,13 +126,8 @@ get_latest_tag() {
 
 # Generate sha256 of latest release file
 retreive_sha256() {
-  echo "${bold}Generating file hash${normal}"
-  wget -q --spider http://google.com
-  local conn_stat=$(echo $?)
-  if [[ "${conn_stat}" != "0" ]]
-  then
-    echo "Internet Connection Lost, please try again later. Quitting..." && exit
-  fi
+  echo "${bold}Generating file hash...${normal}"
+  check_network_conn "${conn_error}"
   mkdir -p "${temp_dir}"
   $(wget -q  https://github.com/"${git_repo}"/archive/"${latest_tag_name}".tar.gz -P "${temp_dir}")
   local sha256_output="$(shasum -a 256 "${temp_dir}${latest_tag_name}".tar.gz)"
@@ -148,22 +153,16 @@ commit_changes() {
     echo "${bold}Comitting changes...${normal}"
     git add "$formula_file"
     git commit -m "Update formula for \"${git_repo}\" to ${latest_tag_name}"
-    # Check internet connectivity
-    wget -q --spider http://google.com
-    local conn_stat=$(echo $?)
-    if [[ "${conn_stat}" != "0" ]]
-    then
-      echo "Couldn't push to GitHub: Not connected to the internet, please push changes yourself when connected. Quitting..." && exit
-    else
-      git push origin master
-    fi
+    check_network_conn "${push_error}"
+    git push origin master
+
     # verify commit
     remote=$(git ls-remote -h origin master | awk '{print $1}')
     local=$(git rev-parse HEAD)
     if [[ $local == $remote ]]; then
       echo "Changes successfully pushed to GitHub and verified."
     else
-      echo "Commit couldn't be pushed to GitHub, please push changes yourself. Quitting..." && exit
+      echo "${push_error}" && exit
     fi
   fi
 }
