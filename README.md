@@ -11,6 +11,7 @@ The individual scripts in this repo have also been linked below:
 - [Django-Revamp](https://github.com/vedantpuri/script-stash/tree/master/Django-revamp)
 - [Reformulate](https://github.com/vedantpuri/script-stash/tree/master/Reformulate)
 - [Scring](https://github.com/vedantpuri/script-stash/tree/master/Scring)
+- [Remedi](https://github.com/vedantpuri/script-stash/tree/master/Remedi)
 
 
 **Note:** The release version of the stash may differ from the version of individual scripts.
