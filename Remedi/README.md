@@ -1,4 +1,4 @@
-![Header](.resources/remedi_hero.png)
+![Header](../.resources/remedi_hero.png)
 
 Simple program to ingest your medicine list with expiry dates and add appropriate reminders x number of days before the expiry. Sets reminders in your apple Reminders app, so they are available across all your synced apple devices!
 
